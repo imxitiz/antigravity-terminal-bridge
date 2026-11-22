@@ -40,7 +40,19 @@ public class TerminalShareActivity extends Activity {
             }
 
             if (uri != null && "content".equals(uri.getScheme())) {
-                processSetupScript(uri);
+                if (uri.toString().contains("setup_terminal.sh")) {
+                    processSetupScript(uri);
+                } else {
+                    Log.i(TAG, "Directory share request received for URI: " + uri);
+                    try {
+                        int flags = intent.getFlags() & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                        if (flags != 0) {
+                            getContentResolver().takePersistableUriPermission(uri, flags);
+                        }
+                    } catch (Exception e) {
+                        Log.w(TAG, "takePersistableUriPermission failed (ignorable): " + e.getMessage());
+                    }
+                }
             }
         }
 

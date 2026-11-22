@@ -37,6 +37,11 @@
             <intent-filter>
                 <action android:name="com.android.virtualization.terminal.action.SHARE_DIRECTORY" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.virtualization.terminal.action.SHARE_DIRECTORY" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
