@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android.virtualization.terminal"
+    android:versionCode="1"
+    android:versionName="1.0.0">
+
+    <uses-sdk
+        android:minSdkVersion="26"
+        android:targetSdkVersion="35" />
+
+    <permission
+        android:name="com.android.virtualization.terminal.permission.MANAGE_TERMINAL"
+        android:protectionLevel="normal" />
+
+    <uses-permission android:name="com.android.virtualization.terminal.permission.MANAGE_TERMINAL" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:label="Linux Terminal Bridge"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar">
+
+        <provider
+            android:name=".TerminalProvider"
+            android:authorities="com.android.virtualization.terminal.provider"
+            android:exported="true" />
+
+        <activity
+            android:name=".TerminalShareActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="android-terminal" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.virtualization.terminal.action.SHARE_DIRECTORY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+    </application>
+</manifest>
